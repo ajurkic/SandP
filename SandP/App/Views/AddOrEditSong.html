@@ -34,6 +34,7 @@
                 <select ng-model="PlaylistId" default="Choose the playlist..." ng-hide="playlists == ''">
                     <option ng-repeat="playlist in playlists" value="{{playlist.PlaylistId}}"> {{playlist.Name}} </option>
                 </select>
+                <!-- stopped sorking here -->
                 <p ng-show="playlists == ''">There are no playlists at the moment.</p>
 
                 <button class="btn btn-default" type="submit" ng-click="addSongToPlaylist(song)" ng-hide="playlists == ''">Add</button>
