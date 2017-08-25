@@ -1,0 +1,43 @@
+﻿<div class="container body-content">
+    <div class="jumbotron text-center">
+        <h1>Add a song</h1>
+        <p class="lead">Please fill the info down below</p>
+    </div>
+    
+    <div class="container col-md-6" ng-controller="songController">
+        <a class="btn btn-default" href="#!/">Back</a>
+
+        <form novalidate ng-submit="saveSong()">
+            <div class="form-group">
+                <label for="songTitle">Song title</label>
+                <input type="text" class="form-control" ng-model="song.Name" required>
+            </div>
+            <div class="form-group">
+                <label for="songAuthor">Author</label>
+                <input type="text" class="form-control" ng-model="song.Author" required>
+            </div>
+            <div class="form-group">
+                <label for="Length">Length</label>
+                <input type="number" class="form-control" ng-model="song.Length" required>
+            </div>
+                
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+    </div>
+    
+    <div class="container col-md-6" ng-controller="playlistController">
+        <h2>Add song to playlist:</h2>
+
+        <form name="addSongToPlaylist">
+            <form-group>
+                <select ng-model="PlaylistId" default="Choose the playlist..." ng-hide="playlists == ''">
+                    <option ng-repeat="playlist in playlists" value="{{playlist.PlaylistId}}"> {{playlist.Name}} </option>
+                </select>
+                <p ng-show="playlists == ''">There are no playlists at the moment.</p>
+
+                <button class="btn btn-default" type="submit" ng-click="addSongToPlaylist(song)" ng-hide="playlists == ''">Add</button>
+            </form-group>
+        </form>
+    </div> 
+</div>
