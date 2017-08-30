@@ -47,5 +47,18 @@
             function () {
                 alert("Deleting song from playlist failed. Please contact support at admin@mail.com");
             });
-    }
+    };
+
+    $scope.addSongToPlaylist = function () {
+        /*
+        Don't have to send anything from form, can reach everything with scope :)
+        */
+        dataService.addSongToPlaylist($scope.SongId, $scope.PlaylistId).$promise.then(
+            function () {
+                $location.path("#!/Playlist/Update/" + $scope.PlaylistId);
+            },
+            function () {
+                alert("Something went wrong with adding the song to playlist.");
+            });
+    };
 });

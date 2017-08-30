@@ -50,17 +50,4 @@
             });
         }
     };
-
-    $scope.addSongToPlaylist = function (playlist) {
-        /*
-        Sending whole playlist here because it is not in the scope like SongId
-        */
-        dataService.addSongToPlaylist($scope.SongId, playlist.PlaylistId).$promise.then(
-            function () {
-                $location.path("#!/Playlist/Update/" + playlist.PlaylistId);
-            },
-            function () {
-                alert("Something went wrong with adding the song to playlist.");
-            });
-    }
 });

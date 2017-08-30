@@ -29,15 +29,16 @@
     <div class="container col-md-6" ng-controller="playlistController">
         <h2>Add song to playlist:</h2>
 
-        <form name="addSongToPlaylist">
+        <!--Had an error here - form name can't be the same as ng-click function name...won't work that way. Changing name will fix it-->
+        <form name="addingSongToPlaylist">
             <form-group>
-                <select ng-model="PlaylistId" default="Choose the playlist..." ng-hide="playlists == ''">
+                <select ng-model="PlaylistId" ng-hide="playlists == ''">
                     <option ng-repeat="playlist in playlists" value="{{playlist.PlaylistId}}"> {{playlist.Name}} </option>
                 </select>
-                <!-- stopped sorking here -->
+
                 <p ng-show="playlists == ''">There are no playlists at the moment.</p>
 
-                <button class="btn btn-default" type="submit" ng-click="addSongToPlaylist(song)" ng-hide="playlists == ''">Add</button>
+                <button class="btn btn-default" type="submit" ng-hide="playlists == ''" ng-click="addSongToPlaylist()">Add</button>
             </form-group>
         </form>
     </div> 
