@@ -33,7 +33,7 @@
         <form name="addingSongToPlaylist">
             <form-group>
                 <select ng-model="PlaylistId" ng-hide="playlists == ''">
-                    <option ng-repeat="playlist in playlists" value="{{playlist.PlaylistId}}"> {{playlist.Name}} </option>
+                    <option ng-repeat="playlist in playlists | songFilter: song.playlists" value="{{playlist.PlaylistId}}"> {{playlist.Name}} </option>
                 </select>
 
                 <p ng-show="playlists == ''">There are no playlists at the moment.</p>

@@ -11,12 +11,21 @@ namespace SandP.Controllers
         private readonly SandPContext _context = new SandPContext();
 
         [Route("api/Song")]
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(string searchText)
         {
             try
             {
-                var songs = _context.Songs.ToList();
-                return Ok(songs);
+                if (string.IsNullOrWhiteSpace(searchText))
+                {
+                    var songs = _context.Songs.ToList();
+                    return Ok(songs);
+                }
+                else
+                {
+                    var songs = _context.Songs.Where( song => song.Name.ToLower().Contains( searchText.ToLower() )).ToList();
+                    return Ok(songs);
+                }
+                
             }
             catch (Exception)
             {

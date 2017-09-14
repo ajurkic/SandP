@@ -22,6 +22,6 @@
         <ul>
             <li ng-repeat="song in playlist.Songs">{{song.Name}} <span class="removeSongX" ng-click="removeSongFromPlaylist(song.SongId, playlist.PlaylistId)">X</span></li>
         </ul>
-        <p ng-show="playlist.Songs == ''">There are no songs in the playlist at the moment.</p>
+        <p ng-show="playlist.Songs == '' || playlist.Songs == null">There are no songs in the playlist at the moment.</p>
     </div>
 </div>

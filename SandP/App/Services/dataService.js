@@ -1,6 +1,6 @@
 ﻿SongsAndPlaylistsApp.factory("dataService", function($resource) {
-    var _getSongs = function () {
-        return $resource('api/Song').query();
+    var _getSongs = function (searchText) {
+        return $resource('api/Song').query({ searchText: searchText ? searchText : '' });
     };
     var _getSong = function (SongId) {
         return $resource('api/Song/:SongId', { SongId: '@SongId' }).get({ SongId: SongId });

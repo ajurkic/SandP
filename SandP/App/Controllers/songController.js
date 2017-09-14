@@ -9,6 +9,11 @@
         $scope.songs = dataService.getSongs();
     }
 
+    $scope.searchSong = function () {
+        $scope.songs = dataService.getSongs($scope.searchText);
+        $scope.tableVisibility = true;
+    };
+
     $scope.saveSong = function () {
         if ($scope.song.SongId > 0) {
             dataService.updateSong($scope.song).$promise.then(
@@ -43,7 +48,8 @@
 
     $scope.updateSong = function () {
         if ($scope.song.SongId > 0) {
-            dataService.updateSong($scope.song).$promise.then(function () {
+            dataService.updateSong($scope.song).$promise.then(
+                function () {
                 $location.path("#!/");
             }, function () {
                 alert("Error saving the updated song");

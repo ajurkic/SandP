@@ -24,15 +24,3 @@ SongsAndPlaylistsApp.config(function ($routeProvider) {
         })
         .otherwise({ redirectTo: "/" });
 });
-
-SongsAndPlaylistsApp.filter('songFilter', function () {
-    return function (collection, song) {
-        var output = [];
-        angular.forEach(collection, function (item) {
-            if (song.indexOf(item) == -1) {
-                output.push(item);
-            }
-        })
-        return output;
-    }
-});

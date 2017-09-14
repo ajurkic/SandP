@@ -1,5 +1,5 @@
 ﻿SongsAndPlaylistsApp.controller("playlistController", function ($scope, dataService, $location, $routeParams, $window) {
-    // prebaceno u if zbog editanja - $scope.playlists = dataService.getPlaylists();
+    // switched to if because of editing - $scope.playlists = dataService.getPlaylists();
     $scope.PlaylistId = $routeParams.PlaylistId;
 
     if ($scope.PlaylistId > 0) {
@@ -55,7 +55,7 @@
         */
         dataService.addSongToPlaylist($scope.SongId, $scope.PlaylistId).$promise.then(
             function () {
-                $location.path("#!/Playlist/Update/" + $scope.PlaylistId);
+                $location.path("#!/Song/Update/" + $scope.PlaylistId);
             },
             function () {
                 alert("Something went wrong with adding the song to playlist.");
