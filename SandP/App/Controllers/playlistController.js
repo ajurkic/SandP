@@ -1,4 +1,4 @@
-﻿SongsAndPlaylistsApp.controller("playlistController", function ($scope, dataService, $location, $routeParams, $window) {
+﻿SongsAndPlaylistsApp.controller("playlistController", function ($scope, dataService, $location, $routeParams) {
     // switched to if because of editing - $scope.playlists = dataService.getPlaylists();
     $scope.PlaylistId = $routeParams.PlaylistId;
 
@@ -60,5 +60,5 @@
             function () {
                 alert("Something went wrong with adding the song to playlist.");
             });
-    };
+        }
 });

@@ -16,7 +16,7 @@ namespace SandP.Controllers
             try
             {
                 var playlists = _context.Playlists.ToList();
-                
+
                 return Ok(playlists);
             }
             catch (Exception)

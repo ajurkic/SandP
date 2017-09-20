@@ -1,10 +1,11 @@
-﻿<div class="container body-content">
+﻿<div class="container body-content" ng-controller="songController">
+    <!--Had to put songController globally because sending PlaylistId of a song to a filter wouldn't be possible-->
     <div class="jumbotron text-center">
         <h1>Add a song</h1>
         <p class="lead">Please fill the info down below</p>
     </div>
     
-    <div class="container col-md-6" ng-controller="songController">
+    <div class="container col-md-6">
         <a class="btn btn-default" href="#!/">Back</a>
 
         <form novalidate ng-submit="saveSong()">
@@ -32,13 +33,15 @@
         <!--Had an error here - form name can't be the same as ng-click function name...won't work that way. Changing name will fix it-->
         <form name="addingSongToPlaylist">
             <form-group>
-                <select ng-model="PlaylistId" ng-hide="playlists == ''">
-                    <option ng-repeat="playlist in playlists | songFilter: song.playlists" value="{{playlist.PlaylistId}}"> {{playlist.Name}} </option>
+                <select ng-model="PlaylistId" ng-hide="playlists == '' || song.Playlists == null">
+                    <option selected disabled value="">Select the playlist</option>
+                    <option ng-repeat="playlist in playlists | songFilter:song.Playlists track by $index" value="{{playlist.PlaylistId}}"> {{playlist.Name}} </option>
                 </select>
 
-                <p ng-show="playlists == ''">There are no playlists at the moment.</p>
+                <p ng-show="playlists == ''">There are no available playlists at the moment.</p>
+                <p ng-show="song.Playlists == null">Please submit the song first.</p>
 
-                <button class="btn btn-default" type="submit" ng-hide="playlists == ''" ng-click="addSongToPlaylist()">Add</button>
+                <button class="btn btn-default" type="submit" ng-hide="playlists == '' || song.Playlists == null" ng-click="addSongToPlaylist()">Add</button>
             </form-group>
         </form>
     </div> 

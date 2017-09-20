@@ -114,6 +114,7 @@
     <Content Include="App\app.js" />
     <Content Include="App\Controllers\playlistController.js" />
     <Content Include="App\Controllers\songController.js" />
+    <Content Include="App\Filters\songFilter.js" />
     <Content Include="App\Services\dataService.js" />
     <Content Include="App\Views\AddOrEditPlaylist.html" />
     <Content Include="App\Views\AddOrEditSong.html" />
