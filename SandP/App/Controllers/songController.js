@@ -14,25 +14,31 @@
         $scope.tableVisibility = true;
     };
 
-    $scope.saveSong = function () {
-        if ($scope.song.SongId > 0) {
-            dataService.updateSong($scope.song).$promise.then(
-                function () {
-                    $location.path('#!/');
-                },
-                function () {
-                    alert("Updating the song went wrong!");
-                });
+    $scope.saveSong = function (valid) {
+
+        if (valid)
+        {
+            if ($scope.song.SongId > 0) {
+                dataService.updateSong($scope.song).$promise.then(
+                    function () {
+                        $location.path('#!/');
+                    },
+                    function () {
+                        alert("Updating the song went wrong!");
+                    });
+            } else {
+                dataService.saveSong($scope.song).$promise.then(
+                    function () {
+                        $location.path('#!/');
+                    },
+                    function () {
+                        alert("Saving the song went wrong!");
+                    });
+            }
         } else {
-            dataService.saveSong($scope.song).$promise.then(
-                function () {
-                    $location.path('#!/');
-                },
-                function () {
-                    alert("Saving the song went wrong!");
-                }
-            );
+            alert("Please check if you have entered values in all fields correctly.");
         }
+        
     };
 
     $scope.deleteSong = function (SongId) {

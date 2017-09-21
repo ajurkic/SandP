@@ -8,23 +8,36 @@
     <div class="container col-md-6">
         <a class="btn btn-default" href="#!/">Back</a>
 
-        <form novalidate ng-submit="saveSong()">
-            <div class="form-group">
+        <!-- Pristine - has element been "touched" before? Once touched, stays that way(false). -->
+        <form novalidate="novalidate" name="SongInputForm" ng-submit="saveSong(SongInputForm.$valid)">
+            <div class="form-group" ng-class="{ 'has-error': !SongInputForm.SongTitle.$valid && (!SongInputForm.SongTitle.$pristine || SongInputForm.$submitted),
+                                                'has-success': SongInputForm.SongTitle.$valid}">
                 <label for="songTitle">Song title</label>
-                <input type="text" class="form-control" ng-model="song.Name" required>
+                <input type="text" class="form-control" ng-model="song.Name" required name="SongTitle" ng-maxlength="20">
+                <p class="help-block" ng-show="!SongInputForm.SongTitle.$valid && !SongInputForm.$pristine">This field is required.</p>
+                <p class="help-block" ng-show="SongInputForm.SongTitle.$error.maxlength">You can enter up to 20 characters.</p>
             </div>
-            <div class="form-group">
+
+            <div class="form-group" ng-class="{ 'has-error': !SongInputForm.SongAuthor.$valid && (!SongInputForm.SongAuthor.$pristine || SongInputForm.$submitted),
+                                                'has-success': SongInputForm.SongAuthor.$valid}">
                 <label for="songAuthor">Author</label>
-                <input type="text" class="form-control" ng-model="song.Author" required>
+                <input type="text" class="form-control" ng-model="song.Author" required name="SongAuthor" ng-maxlength="20">
+                <p class="help-block" ng-show="!SongInputForm.SongAuthor.$valid && !SongInputForm.SongAuthor.$pristine">This field is required.</p>
+                <p class="help-block" ng-show="SongInputForm.SongTitle.$error.maxlength">You can enter up to 20 characters.</p>
             </div>
-            <div class="form-group">
+
+            <div class="form-group" ng-class="{ 'has-error': !SongInputForm.SongLength.$valid && (!SongInputForm.SongLength.$pristine || SongInputForm.$submitted),
+                                                'has-success': SongInputForm.SongLength.$valid}">
                 <label for="Length">Length</label>
-                <input type="number" class="form-control" ng-model="song.Length" required>
+                <input type="number" class="form-control" ng-model="song.Length" required name="SongLength" ng-pattern="integerval" ng-maxlength="4">
+                <p class="help-block" ng-show="!SongInputForm.SongLength.$valid && !SongInputForm.SongLength.$pristine">
+                    This field is required. Only numbers are allowed</p>
+                <p class="help-block" ng-show="SongInputForm.SongLength.$error.maxlength">Number too big.</p>
+
             </div>
                 
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
-
     </div>
     
     <div class="container col-md-6" ng-controller="playlistController">
