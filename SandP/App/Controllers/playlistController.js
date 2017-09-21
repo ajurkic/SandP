@@ -8,6 +8,11 @@
         $scope.playlists = dataService.getPlaylists();
     }
 
+    $scope.searchPlaylist = function () {
+        $scope.playlists = dataService.getPlaylists($scope.searchText);
+        $scope.tableVisibility = true;
+    };
+
     $scope.savePlaylist = function () {
         if ($scope.playlist.PlaylistId > 0) {
             dataService.updatePlaylist($scope.playlist).$promise.then(

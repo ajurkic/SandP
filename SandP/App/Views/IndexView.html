@@ -4,75 +4,108 @@
         <p class="lead">You can see the songs and playlists down below</p>
     </div>
 
-    <div class="col-lg-8" ng-controller="songController">
-        <div class="input-group" style="display: flex;">
-            <input type="text" class="form-control" placeholder="Search for songs..." ng-model="searchText">
-            <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button" ng-click="searchSong()">Go!</button>
-            </span>
+    <div class="left-container">
+        <div class="col-md-6" ng-controller="songController">
+            <div class="input-group" style="display: flex;">
+                <input type="text" class="form-control" placeholder="Search for songs..." ng-model="searchText">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" ng-click="searchSong()">Go!</button>
+                </span>
+            </div>
+
+            <h4 ng-if="tableVisibility && songs != ''">Song(s) found!</h4>
+            <h4 ng-show="songs == ''">Song(s) not found...</h4>
+            <table class="table table-hover table-condensed" id="songs-table" ng-if="tableVisibility && songs != ''">
+                <tr>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Seconds</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="song in songs">
+                    <td>{{ song.Name }}</td>
+                    <td>{{ song.Author }}</td>
+                    <td>{{ song.Length }}</td>
+                    <td>
+                        <a href="#!/Song/Update/{{ song.SongId }}" class="btn btn-primary">Edit/Add to playlist</a>
+                        <a class="btn btn-danger" ng-click="deleteSong(song.SongId)">Delete</a>
+                    </td>
+                </tr>
+            </table>
         </div>
 
-        <h4 ng-if="tableVisibility && songs != ''">Song(s) found!</h4>
-        <h4 ng-show="songs == ''">Song(s) not found...</h4>
-        <table class="table table-hover table-condensed" id="songs-table" ng-if="tableVisibility && songs != ''">
-            <tr>
-                <th>Name</th>
-                <th>Author</th>
-                <th>Length (sec)</th>
-                <th></th>
-            </tr>
-            <tr ng-repeat="song in songs">
-                <td>{{ song.Name }}</td>
-                <td>{{ song.Author }}</td>
-                <td>{{ song.Length }}</td>
-                <td>
-                    <a href="#!/Song/Update/{{ song.SongId }}" class="btn btn-primary">Edit/Add to playlist</a>
-                    <a class="btn btn-danger" ng-click="deleteSong(song.SongId)">Delete</a>
-                </td>
-            </tr>
-        </table>
+        <div class="col-md-6" ng-controller="playlistController">
+            <div class="input-group" style="display: flex;">
+                <input type="text" class="form-control" placeholder="Search for playlists..." ng-model="searchText">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" ng-click="searchPlaylist()">Go!</button>
+                </span>
+            </div>
+
+            <h4 ng-if="tableVisibility && playlists != ''">Playlist(s) found!</h4>
+            <h4 ng-show="playlist == ''">Playlist(s) not found...</h4>
+            <table class="table table-hover table-condensed" id="songs-table" ng-if="tableVisibility && playlist != ''">
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="playlist in playlists">
+                    <td>{{ playlist.Name }}</td>
+                    <td>
+                        <a href="#!/Playlist/Update/{{ playlist.PlaylistId }}" class="btn btn-primary">Edit</a>
+                        <a class="btn btn-danger" ng-click="deletePlaylist(playlist.PlaylistId)">Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="container col-md-7" ng-controller="songController">
+            <h1>Songs</h1>
+            <a class="btn btn-default" href="#!/Song/Add">Add</a>
+
+            <table class="table table-hover table-condensed" id="songs-table">
+                <tr>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Seconds</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="song in songs">
+                    <td>{{ song.Name }}</td>
+                    <td>{{ song.Author }}</td>
+                    <td>{{ song.Length }}</td>
+                    <td>
+                        <a href="#!/Song/Update/{{ song.SongId }}" class="btn btn-primary">Edit/Add to playlist</a>
+                        <a class="btn btn-danger" ng-click="deleteSong(song.SongId)">Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
+    
+    <!--                Playlist search and listing of all playlists                 -->
 
-
-    <div class="container col-md-8" ng-controller="songController">
-        <h1>Songs</h1>
-        <a class="btn btn-default" href="#!/Song/Add">Add</a>
+    <div class="right-container">
         
-        <table class="table table-hover table-condensed" id="songs-table">
-            <tr>
-                <th>Name</th>
-                <th>Author</th>
-                <th>Length (sec)</th>
-                <th></th>
-            </tr>
-            <tr ng-repeat="song in songs">
-                <td>{{ song.Name }}</td>
-                <td>{{ song.Author }}</td>
-                <td>{{ song.Length }}</td>
-                <td>
-                    <a href="#!/Song/Update/{{ song.SongId }}" class="btn btn-primary">Edit/Add to playlist</a>
-                    <a class="btn btn-danger" ng-click="deleteSong(song.SongId)">Delete</a>
-                </td>
-            </tr>
-        </table>
+
+        <div class="container col-md-4" ng-controller="playlistController">
+            <h1>Playlists</h1>
+            <a class="btn btn-default" href="#!/Playlist/Add">Add</a>
+
+            <table class="table table-hover table-condensed" id="playlists-table">
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="playlist in playlists">
+                    <td>{{ playlist.Name }}</td>
+                    <td>
+                        <a href="#!/Playlist/Update/{{ playlist.PlaylistId }}" class="btn btn-primary">Edit</a>
+                        <a class="btn btn-danger" ng-click="deletePlaylist(playlist.PlaylistId)">Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-    <div class="container col-md-4" ng-controller="playlistController">
-        <h1>Playlists</h1>
-        <a class="btn btn-default" href="#!/Playlist/Add">Add</a>
-
-        <table class="table table-hover table-condensed" id="playlists-table">
-            <tr>
-                <th>Name</th>
-                <th></th>
-            </tr>
-            <tr ng-repeat="playlist in playlists">
-                <td>{{ playlist.Name }}</td>
-                <td>
-                    <a href="#!/Playlist/Update/{{ playlist.PlaylistId }}" class="btn btn-primary">Edit</a>
-                    <a class="btn btn-danger" ng-click="deletePlaylist(playlist.PlaylistId)">Delete</a>
-                </td>
-            </tr>
-        </table>
-    </div>
 </div>

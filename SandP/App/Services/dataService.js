@@ -20,8 +20,8 @@
 
     /*---------------------------------------------*/
 
-    var _getPlaylists = function () {
-        return $resource('api/Playlist').query();
+    var _getPlaylists = function (searchText) {
+        return $resource('api/Playlist').query({ searchText: searchText ? searchText : '' });
     };
     var _getPlaylist = function (PlaylistId) {
         return $resource('api/Playlist/:PlaylistId', { PlaylistId: '@PlaylistId' }).get({PlaylistId: PlaylistId});
