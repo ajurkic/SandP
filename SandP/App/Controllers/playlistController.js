@@ -13,23 +13,27 @@
         $scope.tableVisibility = true;
     };
 
-    $scope.savePlaylist = function () {
-        if ($scope.playlist.PlaylistId > 0) {
-            dataService.updatePlaylist($scope.playlist).$promise.then(
+    $scope.savePlaylist = function (valid) {
+        if (valid) {
+            if ($scope.playlist.PlaylistId > 0) {
+                dataService.updatePlaylist($scope.playlist).$promise.then(
+                    function () {
+                        $location.path('#!/');
+                    },
+                    function () {
+                        alert("Updating playlist went wrong");
+                    });
+            } else {
+                dataService.savePlaylist($scope.playlist).$promise.then(
                 function () {
                     $location.path('#!/');
                 },
                 function () {
-                    alert("Updating playlist went wrong");
+                    alert("Saving playlist failed!");
                 });
+            }
         } else {
-            dataService.savePlaylist($scope.playlist).$promise.then(
-            function () {
-                $location.path('#!/');
-            },
-            function () {
-                alert("Saving playlist failed!");
-            });
+            alert("Please check the playlist name.");
         }
     };
 

@@ -54,6 +54,9 @@ namespace SandP.Controllers
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(playlist.Name))
+                    return BadRequest();
+
                 _context.Playlists.Add(playlist);
                 _context.SaveChanges();
                 return Ok();
@@ -87,6 +90,8 @@ namespace SandP.Controllers
                 var PlaylistFromDb = _context.Playlists.Find(playlist.PlaylistId);
 
                 PlaylistFromDb.Name = playlist.Name;
+
+                if (string.IsNullOrWhiteSpace(PlaylistFromDb.Name)) return BadRequest();
 
                 _context.Entry(PlaylistFromDb).State = EntityState.Modified;
                 _context.SaveChanges();

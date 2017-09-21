@@ -7,10 +7,12 @@
     <div class="container col-md-6">
         <a class="btn btn-default" href="#!/">Back</a>
 
-        <form novalidate ng-submit="savePlaylist()">
-            <div class="form-group">
-                <label for="playlistName">Playlist name</label>
-                <input type="text" class="form-control" ng-model="playlist.Name" required>
+        <form name="PlaylistInputForm" novalidate="novalidate" ng-submit="savePlaylist(PlaylistInputForm.$valid)">
+            <div class="form-group" ng-class="{ 'has-error': !PlaylistInputForm.$valid && (!PlaylistInputForm.$pristine || PlaylistInputForm.$submitted),
+                                                'has-success': PlaylistInputForm.$valid}">
+                <label>Playlist name</label>
+                <input type="text" class="form-control" ng-model="playlist.Name" required name="PlaylistName" ng-maxlength="20">
+                <p class="help-block" ng-show="PlaylistInputForm.PlaylistName.$error.maxlength">Name too big.</p>
             </div>
 
             <button type="submit" class="btn btn-default">Submit</button>

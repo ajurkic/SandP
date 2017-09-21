@@ -55,7 +55,12 @@ namespace SandP.Controllers
         {
             try
             {
-                //provjera podataka TODO
+                if (string.IsNullOrWhiteSpace(song.Name))
+                    return BadRequest();
+                if (string.IsNullOrWhiteSpace(song.Author))
+                    return BadRequest();
+                if (song.Length < 0)
+                    return BadRequest("Duration cannot be negative.");
 
                 _context.Songs.Add(song);
                 _context.SaveChanges();
@@ -94,6 +99,10 @@ namespace SandP.Controllers
                 SongFromDb.Name = song.Name;
                 SongFromDb.Author = song.Author;
                 SongFromDb.Length = song.Length;
+
+                if (string.IsNullOrWhiteSpace(SongFromDb.Name)) return BadRequest();
+                if (string.IsNullOrWhiteSpace(SongFromDb.Author)) return BadRequest();
+                if (SongFromDb.Length < 0) return BadRequest("Duration cannot be negative.");
 
                 _context.Entry(SongFromDb).State = EntityState.Modified;
                 _context.SaveChanges();

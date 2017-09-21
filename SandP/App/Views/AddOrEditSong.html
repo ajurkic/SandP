@@ -29,7 +29,7 @@
             <div class="form-group" ng-class="{ 'has-error': !SongInputForm.SongLength.$valid && (!SongInputForm.SongLength.$pristine || SongInputForm.$submitted),
                                                 'has-success': SongInputForm.SongLength.$valid}">
                 <label for="Length">Length</label>
-                <input type="number" class="form-control" ng-model="song.Length" required name="SongLength" ng-pattern="integerval" ng-maxlength="4">
+                <input type="number" class="form-control" ng-model="song.Length" required name="SongLength" ng-pattern="integerval" ng-maxlength="4" min="1">
                 <p class="help-block" ng-show="!SongInputForm.SongLength.$valid && !SongInputForm.SongLength.$pristine">
                     This field is required. Only numbers are allowed</p>
                 <p class="help-block" ng-show="SongInputForm.SongLength.$error.maxlength">Number too big.</p>
